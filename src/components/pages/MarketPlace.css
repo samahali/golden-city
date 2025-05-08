@@ -1,0 +1,438 @@
+.marketplace-page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+.page-title {
+  text-align: center;
+  font-size: 2.2rem;
+  margin-bottom: 2rem;
+  color: #333;
+  position: relative;
+  padding-bottom: 0.5rem;
+}
+
+.page-title::after {
+  content: '';
+  position: absolute;
+  width: 80px;
+  height: 3px;
+  background: linear-gradient(90deg, var(--darkGold), var(--gold), var(--lightGold));
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.view-toggle {
+  display: flex;
+  justify-content: center;
+  margin: 2rem auto;
+  background-color: #f5f5f5;
+  border-radius: 8px;
+  overflow: hidden;
+  width: 100%;
+  max-width: 400px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.toggle-btn {
+  flex: 1;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  background: none;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #555;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.toggle-btn.active {
+  background-color: var(--gold);
+  color: white;
+}
+
+.toggle-btn i {
+  font-size: 1.1rem;
+}
+
+.properties-grid {
+  display: grid;
+  gap: 25px;
+  margin-top: 2rem;
+}
+
+/* Standard grid layout */
+.properties-grid {
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+}
+
+/* 3D grid layout */
+.properties-grid.grid-3d {
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+}
+
+.property-item {
+  height: 100%;
+}
+
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem;
+  text-align: center;
+}
+
+.loader {
+  width: 50px;
+  height: 50px;
+  border: 5px solid rgba(212, 175, 55, 0.2);
+  border-top-color: var(--gold);
+  border-radius: 50%;
+  animation: spin 1s infinite linear;
+  margin-bottom: 1rem;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Responsive styles */
+@media (max-width: 576px) {
+  .page-title {
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .view-toggle {
+    max-width: 300px;
+  }
+
+  .toggle-btn {
+    padding: 0.6rem 1rem;
+    font-size: 0.9rem;
+  }
+
+  .properties-grid {
+    gap: 15px;
+  }
+
+  .properties-grid.grid-3d,
+  .properties-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (min-width: 577px) and (max-width: 768px) {
+  .properties-grid,
+  .properties-grid.grid-3d {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 992px) {
+  .properties-grid,
+  .properties-grid.grid-3d {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 25px;
+  }
+}
+
+@media (min-width: 993px) {
+  .properties-grid,
+  .properties-grid.grid-3d {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+  }
+}
+
+/* Smaller screens in portrait mode */
+@media (max-width: 768px) and (orientation: portrait) {
+  .properties-grid,
+  .properties-grid.grid-3d {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Style for Property component when used in standard view */
+.property-card {
+  background-color: white;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.property-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 8px 30px rgba(212, 175, 55, 0.2);
+}
+
+.property-image {
+  position: relative;
+  height: 200px;
+  overflow: hidden;
+}
+
+.property-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.property-card:hover .property-image img {
+  transform: scale(1.05);
+}
+
+.price-tag {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  background-color: var(--gold);
+  color: white;
+  padding: 5px 10px;
+  border-radius: 4px;
+  font-weight: bold;
+  font-size: 0.9rem;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.property-content {
+  padding: 1.2rem;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.property-title {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.2rem;
+  color: #333;
+  text-align: left;
+}
+
+.property-address {
+  display: flex;
+  align-items: center;
+  font-size: 0.9rem;
+  color: #777;
+  margin-bottom: 0.8rem;
+}
+
+.property-address i {
+  color: var(--gold);
+  margin-right: 0.5rem;
+}
+
+.property-content p {
+  color: #555;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  margin-bottom: 1rem;
+  flex-grow: 1;
+}
+
+.property-features {
+  margin-top: auto;
+  display: flex;
+  justify-content: space-between;
+  padding-top: 0.8rem;
+  border-top: 1px solid #eee;
+}
+
+.feature {
+  display: flex;
+  align-items: center;
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.feature i {
+  color: var(--gold);
+  margin-right: 0.5rem;
+}
+.marketplace-container {
+  max-width: 1300px;
+  margin: 80px auto 40px;
+  padding: 40px 20px;
+  position: relative;
+}
+
+.marketplace-header {
+  text-align: center;
+  margin-bottom: 60px;
+  padding: 30px;
+  background: linear-gradient(to bottom, rgba(250, 245, 230, 0.6), rgba(255, 252, 235, 0.8));
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  position: relative;
+  overflow: hidden;
+}
+
+.marketplace-header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(90deg, var(--darkGold), var(--gold), var(--darkGold));
+}
+
+.marketplace-header h1 {
+  font-size: 2.5rem;
+  color: #333;
+  margin-bottom: 20px;
+  position: relative;
+  display: inline-block;
+}
+
+.marketplace-header h1::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 3px;
+  background: var(--gold);
+}
+
+.marketplace-header p {
+  font-size: 1.15rem;
+  color: #555;
+  max-width: 700px;
+  margin: 30px auto 0;
+  line-height: 1.6;
+}
+
+.properties-section {
+  margin: 70px 0;
+  position: relative;
+}
+
+.section-title {
+  font-size: 2rem;
+  color: var(--darkGold);
+  margin-bottom: 40px;
+  text-align: center;
+  font-weight: 700;
+  position: relative;
+}
+
+.section-title::after {
+  content: '';
+  position: absolute;
+  bottom: -15px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 3px;
+  background: linear-gradient(90deg, var(--darkGold), var(--gold), var(--darkGold));
+}
+
+.properties-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 30px;
+  margin-top: 40px;
+}
+
+.section-divider {
+  height: 2px;
+  background: linear-gradient(to right, rgba(153, 101, 21, 0), rgba(153, 101, 21, 0.5), rgba(153, 101, 21, 0));
+  margin: 80px 0;
+}
+
+/* Make responsive for different screen sizes */
+@media (max-width: 992px) {
+  .marketplace-container {
+    margin: 70px auto 30px;
+    padding: 30px 20px;
+  }
+  
+  .properties-list {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 25px;
+  }
+  
+  .marketplace-header {
+    padding: 25px 20px;
+    margin-bottom: 50px;
+  }
+}
+
+@media (max-width: 768px) {
+  .marketplace-container {
+    margin: 60px auto 20px;
+    padding: 20px 15px;
+  }
+  
+  .marketplace-header h1 {
+    font-size: 2rem;
+  }
+  
+  .section-title {
+    font-size: 1.7rem;
+    margin-bottom: 35px;
+  }
+  
+  .properties-list {
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+  }
+  
+  .section-divider {
+    margin: 60px 0;
+  }
+  
+  .marketplace-header {
+    padding: 25px 15px;
+    margin-bottom: 40px;
+  }
+}
+
+@media (max-width: 576px) {
+  .marketplace-container {
+    margin: 50px auto 20px;
+    padding: 15px 12px;
+  }
+
+  .marketplace-header h1 {
+    font-size: 1.7rem;
+  }
+  
+  .marketplace-header p {
+    font-size: 1rem;
+  }
+  
+  .section-title {
+    font-size: 1.5rem;
+  }
+  
+  .properties-list {
+    grid-template-columns: 1fr;
+    gap: 25px;
+  }
+  
+  .section-divider {
+    margin: 40px 0;
+  }
+  
+  .marketplace-header {
+    padding: 20px 15px;
+    margin-bottom: 30px;
+  }
+}

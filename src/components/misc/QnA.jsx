@@ -2,36 +2,32 @@ import React, {useState} from 'react'
 import './QnA.css'
 
 const QnA = ({n, q}) => {
-  const [showAnswer, setShowAnser] = useState(false);
+  const [showAnswer, setShowAnswer] = useState(false);
   const [border, setBorder] = useState("");
     
   function toggleAnswer() {
-    setShowAnser(!showAnswer);
+    setShowAnswer(!showAnswer);
     toggleBorder();
   }
   
   function toggleBorder() {
-    setBorder(border === "" ? "border-blue": "")
+    setBorder(border === "" ? "border-gold": "")
   }
     return (
         <React.Fragment>
-          <div id="qna" className={border}>
-	    <div className="question">
-	      <h3>
-                {n}. {q.question}
-	      </h3>
-              <div className="drop-down" onClick={toggleAnswer}>
-                {showAnswer ? 
+          <div id="qna" className={border} onClick={toggleAnswer}>
+            <div className="question">
+              <h3>
+                <span className="number">{n}.</span> {q.question}
+              </h3>
+              <div className="drop-down">
                 <i 
-                  className="fas fa-angle-down"
-                /> :
-                <i 
-                  className="fas fa-angle-right "
+                  className={showAnswer ? "fas fa-angle-down" : "fas fa-angle-right"}
                 />
-                }
               </div>
             </div>
-            {showAnswer && <p>
+            {showAnswer && 
+              <p className="answer-content">
                 {q.answer}
               </p>
             }

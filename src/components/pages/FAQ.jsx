@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react';
 import "./FAQ.css";
 import how from "../../datas/faqs/how.js";
 import marketPlace from "../../datas/faqs/marketPlace.js";
@@ -7,36 +7,72 @@ import accounting from "../../datas/faqs/accounting.js";
 import financial from "../../datas/faqs/financial.js";
 import legal from "../../datas/faqs/legal.js";
 import QnA from "../misc/QnA";
-import { useEffect } from 'react';
 
-const About = () => {
-
+const FAQ = () => {
+    const [activeCategory, setActiveCategory] = useState('general');
+    
     useEffect(() => {
-        window.scrollTo(0, 0)
-    })
-    return (
-        <React.Fragment>
-            <section className="faq">
-                <h1 className='page-heading'>FAQ</h1>
-	    	<div>
-	    	  <h2>General Information</h2>
-	          {how.map((how, i) => <QnA n={i+1} q={how} />)}
-	    	  <h2>Marketplace</h2>
-        	  {marketPlace.map((m, i) => <QnA n={i+1} q={m} />)}
-	          <h2>Property Management</h2>
-                  {propertyManagement.map((p, i) => <QnA n={i+1} q={p} />)}
-	          <h2>Accounting</h2>
-                  {accounting.map((a, i) => <QnA n={i+1} q={a} />)}
-	          <h2>Financial</h2>
-                  {financial.map((f, i) => <QnA n={i+1} q={f} />)}
-            <h2>Legal</h2>
-                  {legal.map((l, i) => <QnA n={i+1} q={l} />)}
-	    	</div>
-	        <br/>
-	        <br/>
-            </section>
-        </React.Fragment>
-    )
-}
+        window.scrollTo(0, 0);
+    }, []);
 
-export default About;
+    const categories = [
+        { id: 'general', name: 'General Information' },
+        { id: 'marketplace', name: 'Marketplace' },
+        { id: 'property', name: 'Property Management' },
+        { id: 'accounting', name: 'Accounting' },
+        { id: 'financial', name: 'Financial' },
+        { id: 'legal', name: 'Legal' }
+    ];
+
+    const renderFAQs = () => {
+        switch(activeCategory) {
+            case 'general':
+                return how.map((how, i) => <QnA key={`general-${i}`} n={i+1} q={how} />);
+            case 'marketplace':
+                return marketPlace.map((m, i) => <QnA key={`marketplace-${i}`} n={i+1} q={m} />);
+            case 'property':
+                return propertyManagement.map((p, i) => <QnA key={`property-${i}`} n={i+1} q={p} />);
+            case 'accounting':
+                return accounting.map((a, i) => <QnA key={`accounting-${i}`} n={i+1} q={a} />);
+            case 'financial':
+                return financial.map((f, i) => <QnA key={`financial-${i}`} n={i+1} q={f} />);
+            case 'legal':
+                return legal.map((l, i) => <QnA key={`legal-${i}`} n={i+1} q={l} />);
+            default:
+                return how.map((how, i) => <QnA key={`general-${i}`} n={i+1} q={how} />);
+        }
+    };
+
+    return (
+        <div className="faq-container">
+            <div className="faq-header">
+                <h1>Frequently Asked Questions</h1>
+                <p>Find answers to the most common questions about GoldenCity, our marketplace, and real estate investment opportunities</p>
+            </div>
+
+            <div className="faq-categories">
+                {categories.map(category => (
+                    <button 
+                        key={category.id}
+                        className={`category-btn ${activeCategory === category.id ? 'active' : ''}`}
+                        onClick={() => setActiveCategory(category.id)}
+                    >
+                        {category.name}
+                    </button>
+                ))}
+            </div>
+
+            <div className="faq-list">
+                {renderFAQs()}
+            </div>
+
+            <div className="contact-cta">
+                <h2>Still have questions?</h2>
+                <p>If you couldn't find the answer to your question, our support team is ready to help you.</p>
+                <button className="contact-btn">Contact Us</button>
+            </div>
+        </div>
+    );
+};
+
+export default FAQ;

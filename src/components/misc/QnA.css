@@ -1,41 +1,574 @@
+/* QnA.css - Premium luxury FAQ component with advanced interactions */
 :root {
-  --blue: #006EFF;
-  --darkBlue: #12417E;
+  --faq-gradient: linear-gradient(135deg, var(--darkGold), var(--gold));
+  --faq-shadow: 0 8px 32px rgba(153, 101, 21, 0.12);
+  --faq-transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
 
+/* FAQ container */
 #qna {
-  max-width: 600px;
-  width: 98%;
-  padding: 8px 32px;
-  border-radius: 11px;
-  margin: 16px 1%;
-  text-align: left;
-  box-shadow: 4px 4px 4px 4px rgba(0,0,0,.1);
-}
-
-.border-blue {
-  border: 2px solid var(--blue);
-}
-
-.drop-down .fas {
-  color: var(--blue);
-  font-size: 34px;
-  padding-top: 16px;
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: var(--faq-shadow);
+  margin-bottom: 1.5rem;
+  transition: var(--faq-transition);
+  overflow: hidden;
+  position: relative;
   cursor: pointer;
+  transform-origin: center;
+  border-left: 6px solid transparent;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
 }
 
+/* Glowing effect on hover */
+#qna::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: var(--faq-gradient);
+  border-radius: 18px;
+  z-index: -2;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+#qna:hover::before {
+  opacity: 0.4;
+}
+
+/* Pattern overlay */
+#qna::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23d4af37' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.border-gold {
+  border-left: 6px solid var(--gold) !important;
+  background: linear-gradient(to right, rgba(255, 253, 245, 1), rgba(255, 255, 255, 0.98)) !important;
+}
+
+.border-gold::after {
+  opacity: 0.07 !important;
+}
+
+/* Hover effects */
+#qna:hover {
+  transform: translateY(-4px) scale(1.01);
+  box-shadow: 0 14px 40px rgba(153, 101, 21, 0.16);
+}
+
+.border-gold:hover {
+  transform: translateY(-4px) scale(1.01) !important;
+}
+
+/* Question container */
 .question {
   display: flex;
   justify-content: space-between;
-  gap: 8px;  
+  align-items: center;
+  padding: 1.5rem 2rem;
+  position: relative;
+  z-index: 2;
 }
 
+/* Question styling */
 .question h3 {
-  text-align: left;
+  font-size: 1.15rem;
+  font-weight: 600;
+  margin: 0;
+  color: #333;
+  transition: color 0.3s ease;
+  line-height: 1.5;
+  padding-right: 2rem;
+  position: relative;
 }
 
-@media (min-width: 48em) {
-  #qna {
-    margin: 16px  auto;
+.question h3 .number {
+  color: var(--gold);
+  font-weight: 700;
+  margin-right: 0.5rem;
+  font-size: 1.25rem;
+  display: inline-block;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+/* Gold circle behind the number */
+.question h3 .number::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 30px;
+  height: 30px;
+  background: rgba(212, 175, 55, 0.1);
+  border-radius: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  z-index: -1;
+}
+
+.border-gold .question h3 .number::before {
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.border-gold .question h3 {
+  color: var(--darkGold);
+  font-weight: 700;
+}
+
+/* Dropdown icon */
+.drop-down {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  background: rgba(212, 175, 55, 0.08);
+  color: var(--gold);
+  position: relative;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.drop-down::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--faq-gradient);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 0;
+}
+
+.drop-down i {
+  font-size: 1rem;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  position: relative;
+  z-index: 1;
+}
+
+.border-gold .drop-down {
+  background: var(--gold);
+  box-shadow: 0 6px 16px rgba(153, 101, 21, 0.25);
+}
+
+.border-gold .drop-down::before {
+  opacity: 1;
+}
+
+.border-gold .drop-down i {
+  color: white;
+  transform: rotate(90deg);
+}
+
+/* Answer content */
+.answer-content {
+  margin: 0;
+  padding: 0 2rem 1.8rem;
+  color: #555;
+  line-height: 1.8;
+  font-size: 1rem;
+  animation: fadeInSlideDown 0.6s ease forwards;
+  position: relative;
+}
+
+.border-gold .answer-content {
+  color: #333;
+}
+
+/* Gold highlight in answer text */
+.answer-content strong {
+  color: var(--darkGold);
+  font-weight: 600;
+}
+
+/* Animation for answer reveal */
+@keyframes fadeInSlideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
   }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* FAQ section styling (for the container in Home.jsx) */
+#faq {
+  max-width: 900px;
+  margin: 3.5rem auto 5rem;
+  padding: 0 2rem;
+  position: relative;
+}
+
+/* Decorative elements for the FAQ section */
+#faq::before, #faq::after {
+  content: '';
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  background: radial-gradient(circle, rgba(212, 175, 55, 0.08) 0%, transparent 70%);
+  border-radius: 50%;
+  z-index: -1;
+}
+
+#faq::before {
+  top: -100px;
+  left: -100px;
+}
+
+#faq::after {
+  bottom: -100px;
+  right: -100px;
+}
+
+/* Glowing FAQ title */
+.faq-title {
+  text-align: center;
+  font-size: 2.2rem;
+  margin-bottom: 1rem;
+  background: linear-gradient(45deg, var(--darkGold), var(--gold), var(--lightGold));
+  background-size: 200% auto;
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  animation: gradientFlow 3s linear infinite;
+  position: relative;
+  display: inline-block;
+}
+
+/* Animated underline for FAQ title */
+.faq-title::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 25%;
+  width: 50%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+}
+
+@keyframes gradientFlow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Highlight text in FAQ */
+.faq-highlight {
+  color: var(--gold);
+  font-weight: 600;
+}
+
+/* Special styling for first and last FAQ items */
+#faq > div:first-child {
+  transform: scale(1.03);
+  border-left: 6px solid var(--lightGold);
+  background: linear-gradient(to right, rgba(255, 253, 245, 0.7), rgba(255, 255, 255, 0.9));
+}
+
+#faq > div:last-child {
+  margin-bottom: 0;
+}
+
+/* Custom scroll indicator */
+#qna .scroll-indicator {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 4px;
+  height: 60%;
+  background: rgba(212, 175, 55, 0.1);
+  border-radius: 2px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.border-gold .scroll-indicator {
+  opacity: 1;
+}
+
+#qna .scroll-indicator::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 30%;
+  background: var(--gold);
+  border-radius: 2px;
+  animation: scrollAnimation 2s ease-in-out infinite;
+}
+
+@keyframes scrollAnimation {
+  0% { top: 0; height: 30%; }
+  50% { top: 70%; height: 30%; }
+  100% { top: 0; height: 30%; }
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  #qna {
+    border-radius: 12px;
+    border-left-width: 4px;
+    margin-bottom: 1.25rem;
+  }
+  
+  .question {
+    padding: 1.25rem 1.5rem;
+  }
+  
+  .question h3 {
+    font-size: 1rem;
+    padding-right: 1rem;
+  }
+  
+  .drop-down {
+    width: 36px;
+    height: 36px;
+  }
+  
+  .answer-content {
+    padding: 0 1.5rem 1.5rem;
+    font-size: 0.95rem;
+  }
+  
+  #faq {
+    padding: 0 1.5rem;
+    margin: 3rem auto 4rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .question {
+    padding: 1rem 1.25rem;
+  }
+  
+  .answer-content {
+    padding: 0 1.25rem 1.25rem;
+  }
+  
+  .drop-down {
+    width: 32px;
+    height: 32px;
+  }
+  
+  #faq > div:first-child {
+    transform: scale(1.01);
+  }
+}
+
+/* Improved focus states for accessibility */
+#qna:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.5), var(--faq-shadow);
+}
+
+/* Print styles */
+@media print {
+  #qna {
+    break-inside: avoid;
+    box-shadow: none !important;
+    transform: none !important;
+    border-left: 4px solid var(--gold) !important;
+    border-radius: 0;
+    margin-bottom: 1rem;
+    page-break-inside: avoid;
+  }
+  
+  .question {
+    padding: 1rem 1.5rem;
+  }
+  
+  .answer-content {
+    display: block !important;
+    padding: 0 1.5rem 1rem;
+  }
+  
+  .drop-down {
+    display: none;
+  }
+}
+
+/* Enhanced version - Additional luxury features */
+
+/* Number badge */
+.question h3 .number {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  margin-right: 12px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, rgba(212, 175, 55, 0.2), rgba(212, 175, 55, 0.05));
+  color: var(--gold);
+  font-size: 0.9rem;
+  vertical-align: middle;
+  border: 1px solid rgba(212, 175, 55, 0.2);
+  transition: all 0.4s ease;
+}
+
+.border-gold .question h3 .number {
+  background: var(--faq-gradient);
+  color: white;
+  border-color: transparent;
+  box-shadow: 0 3px 10px rgba(153, 101, 21, 0.2);
+}
+
+/* Ripple effect on click */
+.ripple {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(212, 175, 55, 0.4);
+  transform: scale(0);
+  animation: ripple 0.8s linear;
+  pointer-events: none;
+}
+
+@keyframes ripple {
+  to {
+    transform: scale(4);
+    opacity: 0;
+  }
+}
+
+/* Subtle side indicator */
+#qna .side-indicator {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 4px;
+  height: 100%;
+  background: transparent;
+  transition: background 0.3s ease;
+}
+
+#qna:hover .side-indicator {
+  background: rgba(212, 175, 55, 0.1);
+}
+
+.border-gold .side-indicator {
+  background: linear-gradient(to bottom, var(--gold), var(--darkGold)) !important;
+}
+
+/* Keyboard navigation enhancement */
+#qna:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.5), var(--faq-shadow);
+}
+
+/* Text selection style */
+.answer-content::selection,
+.answer-content *::selection {
+  background: rgba(212, 175, 55, 0.2);
+  color: var(--darkGold);
+}
+
+/* FAQ container title */
+.faq-container-title {
+  text-align: center;
+  margin-bottom: 3rem;
+  position: relative;
+}
+
+.faq-container-title h2 {
+  font-size: 2.4rem;
+  color: #333;
+  margin-bottom: 1rem;
+  position: relative;
+  display: inline-block;
+}
+
+.faq-container-title h2::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 3px;
+  background: var(--faq-gradient);
+}
+
+.faq-container-title p {
+  max-width: 600px;
+  margin: 1rem auto 0;
+  color: #666;
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+
+/* Improved answer content with luxury formatting */
+.answer-content {
+  position: relative;
+  padding-left: 3.5rem;
+}
+
+.answer-content::before {
+  content: 'A';
+  position: absolute;
+  left: 2rem;
+  top: 0;
+  font-size: 1.5rem;
+  font-weight: 300;
+  font-style: italic;
+  color: rgba(212, 175, 55, 0.3);
+}
+
+.border-gold .answer-content::before {
+  color: rgba(212, 175, 55, 0.5);
+}
+
+/* Luxury link styling in answers */
+.answer-content a {
+  color: var(--darkGold);
+  text-decoration: none;
+  position: relative;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  padding-bottom: 1px;
+}
+
+.answer-content a::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 1px;
+  background: var(--gold);
+  transform: scaleX(0.7);
+  transform-origin: left;
+  transition: transform 0.3s ease;
+}
+
+.answer-content a:hover {
+  color: var(--gold);
+}
+
+.answer-content a:hover::after {
+  transform: scaleX(1);
 }

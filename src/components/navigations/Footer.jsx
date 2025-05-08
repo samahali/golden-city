@@ -9,11 +9,11 @@ const Footer= () => {
         <footer className="footer">
           <div className="top">
             <div className="top-left">
-              <h3 className="cl-blue">
+              <h3 className="cl-gold">
                 <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <circle cx="9" cy="16" r="8" stroke="#006EFF"/>
-                        <circle cx="9" cy="16" r="4" stroke="#006EFF" strokeWidth="3"/>
-                    </svg>   
+                        <circle cx="9" cy="16" r="8" stroke="#996515"/>
+                        <circle cx="9" cy="16" r="4" stroke="#996515" strokeWidth="3"/>
+                    </svg>
                 GoldenCity
               </h3>
               <p>The real estate investment that uses blockchain to revolutionise the sector from as little as $10.

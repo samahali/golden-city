@@ -1,0 +1,33 @@
+services:
+  frontend:
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+    command: serve -s build -l 3000
+
+  backend:
+    build: .
+    ports:
+      - "4000:4000"
+    environment:
+      - NODE_ENV=development
+      - PORT=4000
+      - MONGO_URI=mongodb://mongo:27017/golden_city_db
+    volumes:
+      - ./backend:/app/backend
+      - /app/node_modules
+    depends_on:
+      - mongo
+    command: sh -c "cd backend && node server.js"
+
+  mongo:
+    image: mongo:6
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+
+volumes:
+  mongodb_data:

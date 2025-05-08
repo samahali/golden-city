@@ -1,37 +1,42 @@
-import React from 'react'
-import './Property.css'
-import {Link} from "react-router-dom"
+import React from 'react';
+import { Link } from 'react-router-dom';
+import './Property.css';
 
-const Property = ({property}) => {
-    return (
-        <React.Fragment>
-          <div className="property">
-            <div className="property-image">
-              <img src={property.images[0]} alt="property"/>
-            </div>
-            <div className="property-details">
-              <div className="property-details-2">
-              <div className="property-details-2-l">
-                <h3>{property.name}</h3>
-                <h3>{property.price} ETH</h3>
-              </div>
-              <div className="property-details-2-r">
-                <h3 className="profit">{property.profit}%</h3>
-                <p className="profitability">profitability</p>
-              </div>
-              </div>
-              <div className="property-details-1">
-                <p>Funded by {property.investors} investors</p>
-	        <Link to={`/property/${property.id}`}>
-                  <button className="invest-button">
-	    	    Details
-	    	  </button>
-		</Link>
-              </div>
-            </div>
+const Property = ({ property }) => {
+  // Get the first image for the property card
+  const mainImage = property.images[0];
+  
+  return (
+    <div className="property-card">
+      <div className="badge">Hot Deal</div>
+      <div className="property-image">
+        <img src={mainImage} alt={property.name} />
+      </div>
+      <div className="property-info">
+        <h3 className="property-name">{property.name}</h3>
+        <div className="property-price">${property.price}</div>
+        
+        <div className="property-details">
+          <div className="detail-item">
+            <div className="detail-value">{property.profit}%</div>
+            <div className="detail-label">Profit</div>
           </div>
-        </React.Fragment>
-    )
-}
+          <div className="detail-item">
+            <div className="detail-value">{property.returns}%</div>
+            <div className="detail-label">Returns</div>
+          </div>
+          <div className="detail-item">
+            <div className="detail-value">{property.investors}</div>
+            <div className="detail-label">Investors</div>
+          </div>
+        </div>
+        
+        <Link to={`/property/${property.id}`} className="property-button">
+          Details
+        </Link>
+      </div>
+    </div>
+  );
+};
 
 export default Property;

@@ -1,33 +1,40 @@
-import React from 'react';
+import React, {lazy, Suspense} from 'react';
 import {
   BrowserRouter as Router, 
   Routes,
   Route
 } from 'react-router-dom';
+import './App.css';
 import Layout from './layout/Layout';
 import Home from './components/pages/Home';
-import About from './components/pages/About';
-import FAQ from './components/pages/FAQ';
-import NotFound from './components/pages/NotFound';
-import MarketPlace from './components/pages/MarketPlace';
+import Loader from './components/common/Loader';
 
-import './App.css';
-import SingleProperty from './components/pages/SingleProperty';
+const About = lazy(() => import('./components/pages/About'));
+const FAQ = lazy(() => import('./components/pages/FAQ'));
+const NotFound = lazy(() => import('./components/pages/NotFound'));
+const MarketPlace = lazy(() => import('./components/pages/MarketPlace'));
+const SingleProperty = lazy(() => import('./components/pages/SingleProperty'));
 
 function App() {
   return (
     <div className="body-wrap">
       <Router>
-        <Layout>
+        <Suspense fallback={
+          <div className="loader-container" style={{ minHeight: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+            <Loader type="details"/>
+          </div>
+        }>
           <Routes>
-            <Route path='/About' element={<About/>}></Route>
-            <Route path='/FAQ' element={<FAQ/>}></Route>
-            <Route path='/MarketPlace' element={<MarketPlace/>}></Route>
-            <Route path='/property/:id' element={<SingleProperty/>}></Route>
-            <Route path='/' element={<Home/>}></Route>
-	    <Route path = '*' element={<NotFound/>} />
+            <Route path='/' element={<Layout />}>
+              <Route index element={<Home />} />
+              <Route path='About' element={<About />} />
+              <Route path='FAQ' element={<FAQ />} />
+              <Route path='MarketPlace' element={<MarketPlace />} />
+              <Route path='property/:id' element={<SingleProperty />} />
+              <Route path='*' element={<NotFound />} />
+            </Route>
           </Routes>
-        </Layout>
+        </Suspense>
       </Router>
     </div>
   );

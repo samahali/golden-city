@@ -1,51 +1,243 @@
-:root {
-  --blue: #006EFF;
-  --darkBlue: #12417E;
+.gift-container {
+    width: 100%;
+    padding: 20px;
+    box-sizing: border-box;
 }
 
 .gift {
-  background-color: var(--blue);
-  margin: 32px auto;
-  border-radius: 12px;
-  padding: 64px 15vw;
-  padding-bottom: 0;
-  color: white;
+    position: relative;
+    background-color: #f8f9fa;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    padding: 30px;
+    margin: 30px auto;
+    max-width: 1200px;
 }
+
+.gift-content {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 30px;
+}
+
+.text {
+    flex: 1;
+    padding-right: 20px;
+}
+
+.gift-visual {
+    flex: 1;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.discord-badge {
+    display: inline-flex;
+    align-items: center;
+    background-color: #7289da;
+    color: white;
+    padding: 8px 15px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.discord-badge i {
+    margin-right: 8px;
+    font-size: 1.2rem;
+}
+
+.gift h3 {
+    font-size: 2rem;
+    margin-bottom: 15px;
+    color: #333;
+}
+
+.gift p {
+    color: #666;
+    line-height: 1.6;
+    margin-bottom: 25px;
+}
+
+.gift-button-wrapper {
+    text-decoration: none;
+    display: inline-block;
+}
+
 .gift-button {
-  color: var(--blue);
-  border: 1px solid var(--blue);
-  background-color: white;
-  padding: 16px 32px;
-  font-weight: bold;
-  margin: 24px;
+    background-color: var(--gold);
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 30px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 1rem;
+    box-shadow: var(--hoverShadow);
 }
 
-.gift {
-  width: 85vw;
+.gift-button:hover {
+    background-color: var(--gold);
+    transform: translateY(-3px);
+    box-shadow: var(--hoverShadow);
+}
+
+.gift-icon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 5rem;
+    color: var(--gold);
+    z-index: 2;
+    animation: pulse 2s infinite;
 }
 
 .building {
-  width: 90vw;
-  margin-left: -17.5vw;
-  margin-top: 24px;
-  margin-bottom: -12px;
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    object-fit: cover;
+    opacity: 0.8;
+    transition: opacity 0.3s ease;
 }
 
-@media (min-width: 650px) {
-  .gift {
-    max-width: 800px;
-    display: flex;
-    justify-content: space-between;
-    padding: 64px;
-  }
-  .text {
-    width: 300px;
-  }
-  .building {
-    min-width: 300px;
-    max-width: 450px;
-    margin: 0;
-    margin-right: -90px;
+.building:hover {
+    opacity: 1;
+}
 
-  }
+.sparkle {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background-color: #FFD700;
+    border-radius: 50%;
+    z-index: 3;
+    animation: sparkle 2s infinite;
+}
+
+.sparkle:nth-child(1) {
+    top: 20%;
+    left: 70%;
+    animation-delay: 0s;
+}
+
+.sparkle:nth-child(2) {
+    top: 60%;
+    left: 80%;
+    animation-delay: 0.5s;
+}
+
+.sparkle:nth-child(3) {
+    top: 40%;
+    left: 60%;
+    animation-delay: 1s;
+}
+
+@keyframes pulse {
+    0% {
+        transform: translate(-50%, -50%) scale(1);
+    }
+    50% {
+        transform: translate(-50%, -50%) scale(1.1);
+    }
+    100% {
+        transform: translate(-50%, -50%) scale(1);
+    }
+}
+
+@keyframes sparkle {
+    0%, 100% {
+        opacity: 0;
+        transform: scale(0);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.5);
+    }
+}
+
+/* Responsive styles */
+@media (max-width: 992px) {
+    .gift {
+        padding: 25px;
+    }
+    
+    .gift h3 {
+        font-size: 1.75rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .gift-content {
+        flex-direction: column;
+    }
+    
+    .text {
+        order: 2;
+        padding-right: 0;
+        text-align: center;
+    }
+    
+    .gift-visual {
+        order: 1;
+        margin-bottom: 20px;
+        width: 100%;
+    }
+    
+    .building {
+        max-height: 250px;
+    }
+    
+    .gift h3 {
+        font-size: 1.5rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .gift-container {
+        padding: 10px;
+    }
+    
+    .gift {
+        padding: 20px 15px;
+        margin: 15px auto;
+    }
+    
+    .discord-badge {
+        padding: 6px 12px;
+        font-size: 0.75rem;
+    }
+    
+    .discord-badge i {
+        font-size: 1rem;
+    }
+    
+    .gift h3 {
+        font-size: 1.25rem;
+    }
+    
+    .gift p {
+        font-size: 0.9rem;
+    }
+    
+    .gift-button {
+        padding: 10px 20px;
+        font-size: 0.9rem;
+    }
+    
+    .gift-icon {
+        font-size: 3.5rem;
+    }
+    
+    .building {
+        max-height: 200px;
+    }
 }

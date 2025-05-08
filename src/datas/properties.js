@@ -12,7 +12,7 @@ const propertiies = [
     profit: 15.6,
     returns: 10.21,
     investors: 534
-  }//,
+  },
   // {
   //   id: 2,
   //   images: [building1, building3, building3, building2],
@@ -30,7 +30,17 @@ const propertiies = [
   //   profit: 3.6,
   //   returns: 5.37,
   //   investors: 534
-  // }
+  // },
+  {
+    id: 4,
+    images: [building2, building4, building1, building3],
+    name: "Gold Plaza Tower",
+    price: "425,000",
+    profit: 18.5,
+    returns: 14.75,
+    investors: 287
+  }
+
 ]
 
 export default propertiies;

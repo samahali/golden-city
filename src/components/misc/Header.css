@@ -1,17 +1,11 @@
-:root {
-  --blue: #006EFF;
-  --darkBlue: #12417E;
-}
-
 * {
   box-sizing: border-box;
 }
 
-header{
-    color: Black;
-    background: white;
-    background-image: url('../../images/header.jpg');
-    height: 80vh;
+header {
+    color: #fff;
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.3)), url('../../images/header.jpg');
+    height: 85vh;
     max-height: 800px;
     display: flex;
     flex-direction: column;
@@ -20,43 +14,88 @@ header{
     position: relative;
     z-index: 1;
     overflow: hidden;
-    background-position: center; /* Center the image */
-    background-repeat: no-repeat; /* Do not repeat the image */
-    background-size: contain; /* Resize the background image to cover the entire container */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    box-shadow: 0 4px 15px rgba(153, 101, 21, 0.3);
+    border-bottom: 4px solid var(--gold);
+}
+
+header::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 5px;
+    background: linear-gradient(90deg, var(--darkGold), var(--gold), var(--lightGold), var(--gold), var(--darkGold));
+    z-index: 2;
 }
   
-header h1{
-    font-size: 3rem;
+header h1 {
+    font-size: 3.5rem;
     margin: 0 0 1rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    letter-spacing: 1px;
+    font-weight: 700;
+    color: var(--lightGold);
 }
 
-header h2{
-    font-weight: 300;
-    font-size: 1.5rem;
-    margin: 0 0 1rem;
+header h2 {
+    font-weight: 400;
+    font-size: 1.6rem;
+    margin: 0 0 1.5rem;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
-header a{
-    color: #ffff;
+header a {
+    color: #fff;
 }
 
 .action {
-  display: inline-block;
-  margin: 16px;
-  padding: 16px 20px;
-  background-color: var(--blue);
-  border-radius: 16px;
-  text-decoration: none;
+    display: inline-block;
+    margin: 16px;
+    padding: 16px 32px;
+    background-color: var(--gold);
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border: 2px solid transparent;
 }
 
 .action:hover {
-  background-color: var(--darkBlue);
+    background-color: var(--darkGold);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+    border: 2px solid var(--lightGold);
 }
 
 @media (min-width: 48em) {
-  header {
-    background-image: url('../../images/header.jpg');
-    background-size: cover;
-    height: 90vh;
-  }
+    header {
+        background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.3)), url('../../images/header.jpg');
+        background-size: cover;
+        height: 90vh;
+    }
+    
+    header h1 {
+        font-size: 4.5rem;
+    }
+    
+    header h2 {
+        font-size: 1.8rem;
+    }
+}
+
+@media (max-width: 48em) {
+    .action {
+        padding: 12px 24px;
+        font-size: 0.9rem;
+    }
 }

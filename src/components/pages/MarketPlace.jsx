@@ -1,32 +1,36 @@
-import React from 'react'
-import "./About.css";
+import React, { useEffect } from 'react';
+
 import Property from '../misc/Property';
-import properties from "../../datas/properties"
-// import comingSoon from "../../images/coming-soon-p.png"
-import { useEffect } from 'react';
+import Building3D from '../misc/Building3D';
+import './MarketPlace.css';
+import properties from '../../datas/properties';
 
 const MarketPlace = () => {
-
-  useEffect(() => {
-        window.scrollTo(0, 0)
-    })
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
     return (
-        <React.Fragment>
-            <section className="about">
-                <h1 className='page-heading'>MarketPlace</h1>
-                <div className="market-contents">
-                {/* <div className='coming-soon' style={{ backgroundImage: `url(${comingSoon})` }}></div> */}
-                  <div className="pr-header">
-                    <h3 id="properties">Among our properties already financed</h3>
-                    <h3 className="cl-blue">View All</h3>
-                  </div>
-                  <div className="properties">
-                  {properties.map((property) => <Property property={property}/>)}
-                  </div>
+        <div className="marketplace-container">
+            <div className="marketplace-header">
+                <h1>GoldenCity Marketplace</h1>
+                <p>Discover premium real estate investment opportunities with high returns and secure ownership</p>
+            </div>
+
+            <div className="properties-section">
+                <h2 className="section-title">Properties for Investment</h2>
+                <div className="properties-list">
+                    {properties.map((property) => (
+                        <Property key={property.id} property={property}/>
+                    ))}
                 </div>
-            </section>
-        </React.Fragment>
-    )
+            </div>
+
+            <div className="section-divider"></div>
+
+            {/* Add the enhanced 3D Building component */}
+            <Building3D/>
+        </div>
+    );
 }
 
 export default MarketPlace;
