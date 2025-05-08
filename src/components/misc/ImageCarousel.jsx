@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const ImageCarousel = ({ images }) => {
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
@@ -23,54 +23,6 @@ const ImageCarousel = ({ images }) => {
       setSelectedImageIndex(newIdx);
     }
   };
-
-//   return (
-//     <div className="carousel-container">
-//       <div
-//         className="selected-image"
-//         style={{ backgroundImage: `url(${selectedImage?.url})` }}
-//       />
-//       <div className="carousel">
-//         <div className="carousel__images">
-//           {images &&
-//             images.map((image, idx) => (
-//               <div
-//                 onClick={() => handleSelectedImageChange(idx)}
-//                 style={{ backgroundImage: `url(${image.url})` }}
-//                 key={image.id}
-//                 className={`carousel__image ${
-//                   selectedImageIndex === idx && "carousel__image-selected"
-//                 }`}
-//                 ref={(el) => (carouselItemsRef.current[idx] = el)}
-//               />
-//             ))}
-//         </div>
-//       </div>
-//     </div>
-//   );
-  // return (
-  //   <div className="carousel-container">
-  //     <img
-  //       className="selected-image"
-  //       src={selectedImage?.url}
-  //     />
-  //       <div className="carousel__images">
-  //         {images &&
-  //           images.map((image, idx) => (
-  //             <img
-  //               onClick={() => handleSelectedImageChange(idx)}
-  //               src={image.url}
-  //               key={image.id}
-  //               className={`carousel__image ${
-  //                 selectedImageIndex === idx && "carousel__image-selected"
-  //               }`}
-  //               ref={(el) => (carouselItemsRef.current[idx] = el)}
-  //             />
-  //           ))}
-  //       </div>
-  //   </div>
-  // );
-
   return (
     <div className="carousel-container">
       <div className="selected-image" style={{ backgroundImage: `url(${selectedImage})` }}/>

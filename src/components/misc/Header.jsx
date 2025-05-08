@@ -1,10 +1,8 @@
-import React from 'react'
-//import { Link } from "react-router-dom"
 import './Header.css'
 
 const Header = () => {
     return (
-        <React.Fragment>
+        <>
             <header className="bg-image">
                 <div className="bg-container">
                     <h1 style={{ color: 'white', fontSize: '60px' }}>
@@ -18,7 +16,7 @@ const Header = () => {
                     </a>
                 </div>
             </header>
-        </React.Fragment>
+        </>
     )
 }
 

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import "./Home.css";
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import Header from '../misc/Header';
@@ -20,7 +20,7 @@ const Home = () => {
   }, []);
 
   return (
-    <React.Fragment>
+    <>
       <Header />
       
       <section className="invest-process">
@@ -192,7 +192,7 @@ const Home = () => {
       </section>
       
       <Gift />
-    </React.Fragment>
+    </>
   );
 };
 

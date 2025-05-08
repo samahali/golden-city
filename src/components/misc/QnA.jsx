@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import {useState} from 'react'
 import './QnA.css'
 
 const QnA = ({n, q}) => {
@@ -14,7 +14,7 @@ const QnA = ({n, q}) => {
     setBorder(border === "" ? "border-gold": "")
   }
     return (
-        <React.Fragment>
+        <>
           <div id="qna" className={border} onClick={toggleAnswer}>
             <div className="question">
               <h3>
@@ -32,7 +32,7 @@ const QnA = ({n, q}) => {
               </p>
             }
           </div>
-        </React.Fragment>
+        </>
     )
 }
 

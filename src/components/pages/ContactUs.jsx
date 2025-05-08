@@ -1,8 +1,6 @@
-import React from 'react'
-
 const ContactUs = () => {
     return (
-        <React.Fragment>
+        <>
             <section className="content-container">
                 <div className="textArea"> 
                     <h2>Contact Us</h2>
@@ -77,7 +75,7 @@ const ContactUs = () => {
                     </div>
                 </div>
             </section>
-        </React.Fragment>
+        </>
     )
 }
 

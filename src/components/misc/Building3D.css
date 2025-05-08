@@ -8,13 +8,31 @@
 
 .building3d-header {
   margin-bottom: 30px;
+  position: relative;
+}
+
+.building3d-header:after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 3px;
+  background: linear-gradient(90deg, #DAA520, #B8860B, #DAA520);
+  border-radius: 2px;
 }
 
 .building3d-container h2 {
-  color: var(--darkGold);
+  color: #B8860B; /* Dark gold */
   margin-bottom: 12px;
-  font-size: 2rem;
+  font-size: 2.5rem;
   font-weight: 700;
+  background: linear-gradient(90deg, #B8860B, #DAA520, #B8860B);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  display: inline-block;
 }
 
 .building3d-container p {
@@ -26,16 +44,22 @@
 
 .building3d-wrapper {
   position: relative;
-  border-radius: 12px;
+  border-radius: 15px;
   overflow: hidden;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 10px 30px rgba(184, 134, 11, 0.25);
   background-color: #f9f9f9;
   margin-top: 20px;
+  transition: all 0.3s ease;
+}
+
+.building3d-wrapper:hover {
+  box-shadow: 0 15px 40px rgba(184, 134, 11, 0.4);
+  transform: translateY(-5px);
 }
 
 .building3d-canvas {
   width: 100%;
-  height: 500px;
+  height: 600px;
   position: relative;
 }
 
@@ -57,7 +81,9 @@
   bottom: 20px;
   left: 50%;
   transform: translateX(-50%);
-  background: rgba(153, 101, 21, 0.8);
+  display: flex;
+  gap: 12px;
+  background: linear-gradient(90deg, rgba(218, 165, 32, 0.85), rgba(184, 134, 11, 0.85));
   color: white;
   padding: 10px 20px;
   border-radius: 30px;
@@ -66,33 +92,122 @@
   -webkit-backdrop-filter: blur(5px);
   z-index: 10;
   opacity: 0.9;
-  transition: opacity 0.3s ease;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
 .building3d-instructions:hover {
   opacity: 1;
+  transform: translateX(-50%) translateY(-5px);
+}
+
+.instruction {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.instruction i {
+  font-size: 1rem;
+}
+
+/* Info boxes below the 3D model */
+.building3d-info-boxes {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  margin-top: 40px;
+}
+
+.info-box {
+  flex: 1;
+  background: linear-gradient(135deg, #ffffff, #FFF8E1);
+  border-radius: 15px;
+  padding: 25px 20px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+  text-align: center;
+  border: 1px solid rgba(184, 134, 11, 0.2);
+}
+
+.info-box:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 15px 30px rgba(184, 134, 11, 0.3);
+  border-color: rgba(184, 134, 11, 0.5);
+}
+
+.info-icon {
+  width: 60px;
+  height: 60px;
+  margin: 0 auto 15px;
+  background: linear-gradient(135deg, #DAA520, #B8860B);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 5px 15px rgba(184, 134, 11, 0.3);
+}
+
+.info-icon i {
+  font-size: 24px;
+  color: white;
+}
+
+.info-box h3 {
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+  color: #B8860B;
+  font-weight: 600;
+}
+
+.info-box p {
+  font-size: 0.95rem;
+  color: #666;
+  line-height: 1.5;
 }
 
 /* Make responsive for different screen sizes */
 @media (max-width: 992px) {
   .building3d-canvas {
-    height: 400px;
+    height: 500px;
+  }
+  
+  .building3d-container h2 {
+    font-size: 2rem;
   }
 }
 
 @media (max-width: 768px) {
   .building3d-canvas {
-    height: 350px;
+    height: 400px;
   }
   
   .building3d-container h2 {
-    font-size: 1.7rem;
+    font-size: 1.8rem;
+  }
+  
+  .building3d-info-boxes {
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .info-box {
+    padding: 20px 15px;
+  }
+  
+  .info-icon {
+    width: 50px;
+    height: 50px;
+  }
+  
+  .info-icon i {
+    font-size: 20px;
   }
 }
 
 @media (max-width: 480px) {
   .building3d-canvas {
-    height: 300px;
+    height: 350px;
   }
   
   .building3d-container h2 {
@@ -106,5 +221,12 @@
   .building3d-instructions {
     font-size: 0.8rem;
     padding: 8px 15px;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 90%;
+  }
+  
+  .instruction {
+    margin: 3px 0;
   }
 }

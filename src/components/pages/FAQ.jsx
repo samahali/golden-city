@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import "./FAQ.css";
 import how from "../../datas/faqs/how.js";
 import marketPlace from "../../datas/faqs/marketPlace.js";

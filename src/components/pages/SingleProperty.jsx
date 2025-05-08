@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useMemo } from "react";
+import { useEffect, useState, useMemo } from "react";
 import ImageCarousel from "../misc/ImageCarousel";
 import "./SingleProperty.css";
 import { useParams } from "react-router-dom";
